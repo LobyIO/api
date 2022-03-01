@@ -65,6 +65,8 @@ A `TicketType` represents the type of ticket, that you want to make available fo
 | `enableUpgradeToMembership` | `number` | `true` | If you sell tickets and memberships this will enable customers to deduct the price from their membership purchase | `true` |
 | `props` | `object` | `null` | A custom object, where anything can be stored. | `{ "foreignRelevantKey": "bd4a0997-39db-41d9-883a-cdfa83e2101f" }` |
 
+#### TicketTypeTranslation
+
 A `TicketTypeTranslation` contains translated fields for the object.
 
 | Property | Type | Default | Description | Example |
@@ -210,6 +212,7 @@ An `Event` object represents an event, which can have tickets, that can be sold.
 | `fields` | `array` | [] | List of `Field` objects, that will be appended to the default fields from the organization.  |
 | `props` | `object` | `null` | An optional custom object, where anything can be stored. | `{ "foreignRelevantKey": "bd4a0997-39db-41d9-883a-cdfa83e2101f" }` |
 
+#### EventTranslation
 
 An `EventTranslation` contains translated fields for the object.
 
@@ -246,6 +249,8 @@ An `EventTicketType` object represents all the types of tickets for a particular
 | `salesEnd` | `number` | `null` | Date for when the the sale of these tickets will end. | `1646071663704` |
 | `targets` | `array` | [] | List of `Target` objects. |
 | `props` | `object` | `null` | An optional custom object, where anything can be stored. | `{ "foreignRelevantKey": "bd4a0997-39db-41d9-883a-cdfa83e2101f" }` |
+
+#### EventTicketTypeTranslation
 
 A `EventTicketTypeTranslation` contains translated fields for the `EventTicketType` object.
 
@@ -291,6 +296,12 @@ An `EventProduct` object represents a product, that can be purchased along with 
 | `targets` | `array` | [] | List of `Target` objects. |
 | `props` | `object` | `null` | An optional custom object, where anything can be stored. | `{ "foreignRelevantKey": "bd4a0997-39db-41d9-883a-cdfa83e2101f" }` |
 
+#### EventProductTranslation
+
+| Property | Type | Default | Description | Example |
+| - | - | - | - | - |
+| `language`* | `string` ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)) | | Language code for the translation |  `"da"` |
+| `name` | `string` | `null` | See description of field in `EventProduct` |  
 
 ### Create an event product
 
@@ -327,9 +338,24 @@ A `Field` that can be used to get additional information.
 | `placeholder` | `string` | `null` | Optional placeholder for the field  | `"Type in your allergies"` |
 | `note` | `string` | `null` | A note for the field | `"We need to know about your allergies, so we can..."` |
 | `required ` | `boolean` | `false` | Whether the field is required | `true` |
-| `options` | `array` | `null` | Needed for types `RADIO` and `LIST`.  | `[{ label: 'Red', value: 'RED' },...]` |
+| `options` | `array` | `null` | Needed for types `RADIO` and `LIST`. | `[{ label: 'Red', value: 'RED' },...]` |
+| `options[].label` | `string` | `null` | The label of the option | `"Green"` |
+| `options[].value` | `string` | `null` | The value of the option, that is used behind the scenes | `"GREEN"` |
+| `options[].translations` | `array` | `null` | To add translations to each option | `[{ language: 'da', value: 'RED' },...]` |
+| `options[].translations[].language` | `string` ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)) | `null` | Language code for the translation | `[{ language: 'da', value: 'RED' },...]` |
+| `options[].translations[].value` | `string` | `null` | See `options[].value` description | |
 | `defaultOption` | `string` | `null` | Whether an option should be preselected. | `"RED"` |
 | `props` | `object` | `null` | An optional custom object, where anything can be stored. | `{ "foreignRelevantKey": "bd4a0997-39db-41d9-883a-cdfa83e2101f" }` |
+
+#### FieldTranslation
+
+| Property | Type | Default | Description | Example |
+| - | - | - | - | - |
+| `language`* | `string` ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)) | | Language code for the translation |  `"da"` |
+| `label` | `string` | `null` | See description of field in `Field` |  
+| `placeholder` | `string` | `null` | See description of field in `Field` |  
+| `note` | `string` | `null` | See description of field in `Field` |  
+
 
 ## Price Variation
 
@@ -341,6 +367,13 @@ A `PriceVariation` can be used to differentiate prices among targets
 | `name`* | `string` | | The name of the variation, so users know what this price variation is about. | `"Free for all members!!"` |
 | `type`* | `string` |  | Choose between the following types: `ABSOLUTE`, `DISCOUNT`, `DISCOUNT_PERCENTAGE` | `"DISCOUNT_PERCENTAGE"` |
 | `value` | `number` | `null` | The value. If `ABSOLUTE`, has been selected, this is the new price. If `DISCOUNT` has been selected, then set how much discount the target gets. If `DISCOUNT_PERCENTAGE` has been selected, then set the percentage. | `0.4` |
+
+#### PriceVariationTranslation
+
+| Property | Type | Default | Description | Example |
+| - | - | - | - | - |
+| `language`* | `string` ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)) | | Language code for the translation |  `"da"` |
+| `name` | `string` | `null` | See description of field in `PriceVariation` |  
 
 
 # Images
