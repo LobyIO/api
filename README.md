@@ -390,6 +390,7 @@ Loby uses webhooks to notify your application when an event happens in your acco
 | `EVENT_CREATED` | `Event` |  |
 | `EVENT_UPDATED` | `Event` |  |
 | `EVENT_DELETED` | `Event` |  |
+| `EVENT_TICKET_CREATED` | `EventTicket` |  |
 | `TICKET_CREATED` | `Ticket` |  |
 | `TICKET_TYPE_CREATED` | `TicketType` |  |
 | `TICKET_TYPE_UPDATED` | `TicketType` |  |
