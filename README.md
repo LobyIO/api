@@ -58,7 +58,7 @@ A `TicketType` represents the type of ticket, that you want to make available fo
 | `deletedAt` | `number` | `null` | Date for when the TicketType has been deleted. | `1646071663704` |
 | `currency` | `string` ([ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)) | `null` | Currency of ticket. Defaults to the currency of the organization | `"EUR"` |
 | `slug` | `string` | `null` | Slug handle that can be used for creating nice url's | `"adult"` |
-| `price` | `number` | `null` | Price of ticket in lowest unit. Cents for `EUR`, `USD` etc. 0 = FREE | `"Adult 18+ ticket"` |
+| `price` | `number` | `null` | Price of ticket in lowest unit. Cents for `EUR`, `USD` etc. 0 = FREE | `12500` |
 | `description` | `string` | `null` | Description facing the customer.  | `"You need to be 18 years old to buy this"` |
 | `translations` | `array` | `[]` | A list of translation objects `TicketTypeTranslation` for the object | `[{ language: "da", name: "Voksen billet" }]`
 | `sortIndex` | `number` | `null` | Index is used for sorting TicketTypes. It will order it Ascending | `3` |
@@ -174,6 +174,79 @@ Example
 `GET /tickets/:id/email`
 
 Returns an `Email` object, that contains all the relevant information for the ticket and that can be send to the customer. The email has been enabled and costumized via Loby Cloud.
+
+## Email
+
+A `Email` contains translated fields for the object.
+
+| Property | Type | Default | Description | Example |
+| - | - | - | - | - |
+| `language`* | `string` | | The language for the email |  `"da"` |
+| `subject`* | `string` | | The subject for the email |  `"Here is your ticket"` |
+| `html`* | `string` | | The complete HTML to be used for sending | `"<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Tran..."` |
+| `plainText`* | `string` | | Plain text version of email for email clients, that don't support html | `"Hello there! Here is your ticket"`
+
+## MembershipType
+
+A `MembershipType` represents the type of membership, that you want to make available for your customers.
+
+
+| Property | Type | Default | Description | Example |
+| - | - | - | - | - |
+| `id`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Unique identifier | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `title`* | `string` | | Title of membership |  `"All access pass"` |
+| `subTitle` | `string` | | Sub title of membership |  `"So great and beneficial!"` |
+| `createdAt`* | `number` | | Date for when the MembershipType has been created. |  `1646071663704` |
+| `updatedAt`* | `number` | | Date for when the MembershipType has been updated. |  `1646071663704` |
+| `deletedAt` | `number` | `null` | Date for when the MembershipType has been deleted. | `1646071663704` |
+| `currency` | `string` ([ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)) | `null` | Currency of membership type. Defaults to the currency of the organization | `"EUR"` |
+| `slug` | `string` | `null` | Slug handle that can be used for creating nice url's | `"access"` |
+| `price` | `number` | `null` | Price of ticket in lowest unit. Cents for `EUR`, `USD` etc. 0 = FREE | `54000` |
+| `period` | `string` | `YEAR` | For how long the membership will be active until it needs to be renewed. Can be either `YEAR` or `MONTH`. | '"MONTH"'
+| `description` | `string` | `null` | The description of the event. This is a `RichText` object and needs to be parsed |
+| `translations` | `array` | `[]` | A list of translation objects `MembershipTypeTranslation` for the object | `[{ language: "da", name: "Et adgang til alt..." }]`
+| `sortIndex` | `number` | `null` | Index is used for sorting TicketTypes. It will order it Ascending | `3` |
+| `benefits` | `array` | `null` | An array of benefits for the mmembership, that can be shown different places | [] |
+| `benefits.description` | `string` | `null` | The description of the event. This is a `RichText` object and needs to be parsed | [] |
+| `benefits.translations` | `array` | `null` | Translations of the benefit | [] |
+| `benefits[].translations[].language` | `string` ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)) | `null` | Language code for the translation | `[{ language: 'da', value: 'RED' },...]` |
+| `benefits[].translations[].description` | `string` | `null` | See `benefits[].description` description | |
+| `availableAsGiftCard` | `number` | `true` | Set to true if you want to sell the membership type as gift card as well | `true` |
+| `props` | `object` | `null` | A custom object, where anything can be stored. | `{ "foreignRelevantKey": "bd4a0997-39db-41d9-883a-cdfa83e2101f" }` |
+
+#### MembershipTypeTranslation
+
+A `MembershipTypeTranslation` contains translated fields for the object.
+
+| Property | Type | Default | Description | Example |
+| - | - | - | - | - |
+| `language`* | `string` ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)) | | Language code for the translation |  `"da"` |
+| `title` | `string` | `null` | See description of field in `MembershipType` |  
+| `subTitle` | `string` | `null` | See description of field in `MembershipType` |  
+| `description` | `string` | `null` | See description of field in `MembershipType` |
+| `description` | `string` | `null` | See description of field in `MembershipType` |
+| `slug` | `string` | `null` | See description of field in `MembershipType |
+
+## Membership
+
+A `Membership` represents an entered membership, that has a MembershipType. A Membership can e.g. be used to get benefits or to get access to the museum.
+
+
+| Property | Type | Default | Description | Example |
+| - | - | - | - | - |
+| `id`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Unique identifier | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `createdAt`* | `number` | | Date for when the Ticket has been created. | `1646071663704` |
+| `updatedAt`* | `number` | | Date for when the Ticket has been updated. | `1646071663704` |
+| `renewedAt` | `number` | `null` | Date for when the membership has been renewed | `1646071663704` |
+| `expiresAt` | `number` | `null` | Date for when the membership will expire | `1646071663704` |
+| `qrUrl`* | `string` | | The URL to show via a QR Code, that can be used to reference the Ticket. The data is encrypted and the id of the ticket cannot be derived unless the correct decryption key is being used. | `https://acme-museum.com/tickets/34?qr=qouireja90uoijw3rtef9oij` |
+| `iOSPassUrl`* | `string` | | The URL for the wallet pass | `https://pass.loby.io/438ue8349ur` |
+| `androidPassUrl`* | `string` | | The URL for the Android wallet pass | `https://android-pass.loby.io/438ue8349ur` |
+| `membershipTypeId`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | A reference to a `MembershipType` |  `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `orderId` | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | `null` | A reference to an `Order` |  `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `userId` | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | `null` | A reference to a `User` |  `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |-cdfa83e2101f"` |
+| `autoRenew` | `boolean` | `false` | If the membership has been set to auto renew | `true` |
+| `props` | `object` | `null` | An optional custom object, where anything can be stored. | `{ "foreignRelevantKey": "bd4a0997-39db-41d9-883a-cdfa83e2101f" }` |
 
 ## Email
 
@@ -374,6 +447,36 @@ A `PriceVariation` can be used to differentiate prices among targets
 | - | - | - | - | - |
 | `language`* | `string` ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)) | | Language code for the translation |  `"da"` |
 | `name` | `string` | `null` | See description of field in `PriceVariation` |  
+
+## UserActivity
+
+A general `UserActivity` object to contain data about relevant activities for the user
+
+| Property | Type | Default | Description | Example |
+| - | - | - | - | - |
+| `id`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Unique identifier | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `userId`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Reference to the user | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `description` | `string` | `null` | Something in plain language describing the activity. Templating can be applied with the activity object |  `"Here is your ticket"` |
+| `type` | `string` | `null` | Choose between `PURCHASE`, `VISIT`, etc | `PURCHASE` |
+| `props` | `object` | `null` | An optional custom object, where anything can be stored. There are standard fields for each type. | `{ "foreignRelevantKey": "bd4a0997-39db-41d9-883a-cdfa83e2101f" }` |
+
+#### Standard fields for activity types
+
+#### `PURCHASE`
+```json
+"props": [
+  {
+    "lines": [
+      {
+        "price": ,
+        "currency": ,
+        "description": ,
+        "quantity": ,
+      }
+    ]
+  }
+]
+```
 
 
 # Images
