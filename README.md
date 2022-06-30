@@ -401,7 +401,7 @@ A `Field` that can be used to get additional information.
 
 | Property | Type | Default | Description | Example |
 | - | - | - | - | - |
-| `role` | `string` | `null` | Choose between some of the standard roles `EMAIL`, `FIRST_NAME`, `LAST_NAME`, `FULL_NAME`, `ADDRESS`, `ADDRESS2`, `POSTAL_CODE`, `CITY`, `COUNTRY`, `PHONE` | `FIRST_NAME` |
+| `role` | `string` | `null` | Choose between some of the standard roles `EMAIL`, `FIRST_NAME`, `LAST_NAME`, `FULL_NAME`, `ADDRESS`, `ADDRESS2`, `POSTAL_CODE`, `CITY`, `COUNTRY`, `PHONE`, `GENDER`, `BIRTHDAY`, `BIRTHYEAR` | `FIRST_NAME` |
 | `id` | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | `null` | Unique identifier | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
 | `type` | `string` | `null` | Choose between one of these types: `TEXT`, `BIG_TEXT`, `RADIO`, `LIST`, `CHECKBOX` | `TEXT` |
 | `createdAt` | `number` | `null` | Date for when the object has been created. | `1646071663704` |
