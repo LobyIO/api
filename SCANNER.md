@@ -22,7 +22,7 @@ The data that will be included:
 | Property | Type | Default | Description | Example |
 | - | - | - | - | - |
 | `scanRequestId`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Id of scan | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
-| `hmac`* | `string` | | Base 64 encoded HMAC of the id of the scan to verify authenticity | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `hmac`* | `string` | | Base 64 encoded HMAC of the id of the scan to verify authenticity | `"LjtublVo7f29ztAZq1aVT1W9lXX7JoBwBp1hrNFGFoF5URBjSXKtAJpn1ejXrG+Mh4pMI0samNlpdmogtBabuw=="` |
 | `scannerId`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Id of the scanner, that can be looked up | `"51c2df21-a7f3-4b92-a7b2-3d221ced61ae"` |
 | `barcodeType`* | `string` | | Type of barcode (`"EAN-13"`, `"Code-128"`) | `"QRCode"` |
 | `barcodeData`* | `string` | | Barcode data | `"93487844"` |
@@ -31,7 +31,7 @@ Example of json body:
 ```json
 {
   "scanRequestId": "bd4a0997-39db-41d9-883a-cdfa83e2101f",
-  "hmac": "",
+  "hmac": "LjtublVo7f29ztAZq1aVT1W9lXX7JoBwBp1hrNFGFoF5URBjSXKtAJpn1ejXrG+Mh4pMI0samNlpdmogtBabuw==",
   "scannerId": "51c2df21-a7f3-4b92-a7b2-3d221ced61ae",
   "barcodeType": "EAN-13",
   "barcodeData": "90834098394"
