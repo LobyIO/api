@@ -7,13 +7,9 @@ Loby Scanner, which is available for [iOS](https://apps.apple.com/app/loby-scann
 
 1. The Scanner recognizes a barcode (QR, Code128, EAN-13 etc.)
 2. The Scanner sends the barcode information to the endpoint
-3. Your Web Service responds to the barcode
+3. Your Web Service reads the barcode and returns a response
 4. The Scanner acts according to your Web Service response
 
-
-## Authentication
-
-https, bearer etc. json in body
 
 # Receive a scan
 
@@ -25,15 +21,18 @@ The data that will be included:
 
 | Property | Type | Default | Description | Example |
 | - | - | - | - | - |
-| `scanId`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Id of scan | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
-| `scannerId`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Id of the scanner, that can be looked up | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `scanRequestId`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Id of scan | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `hmac`* | `string` | | Base 64 encoded HMAC of the id of the scan to verify authenticity | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `scannerId`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Id of the scanner, that can be looked up | `"51c2df21-a7f3-4b92-a7b2-3d221ced61ae"` |
 | `barcodeType`* | `string` | | Type of barcode (`"EAN-13"`, `"Code-128"`) | `"QRCode"` |
 | `barcodeData`* | `string` | | Barcode data | `"93487844"` |
 
 Example of json body:
 ```json
 {
-  "id": "bd4a0997-39db-41d9-883a-cdfa83e2101f",
+  "scanRequestId": "bd4a0997-39db-41d9-883a-cdfa83e2101f",
+  "hmac": "",
+  "scannerId": "51c2df21-a7f3-4b92-a7b2-3d221ced61ae",
   "barcodeType": "EAN-13",
   "barcodeData": "90834098394"
 }
@@ -56,4 +55,23 @@ Example of response:
   "message": "Entrance ticket already used!",
   "icon": "WARNING"
 }
+```
+
+## Verifying a Scanner Request
+
+In order to cut down the number of round trips, the requests are send directly from the scanner client. That means that it would be impossible to predict the IP of the incoming requests and thereby only white list certain ip addresses to prevent ddos, exploits etc. Instead, each request includes an HMAC, that the web service can use to verify the authenticity of the request.
+
+To generate the HMAC and verify it in Node, you can do the following:
+
+```js
+import crypto from 'crypto'
+
+const hmac = crypto.createHmac('sha512', secret).update(data.scanRequestId).digest('base64')
+
+if (hmac === data.hmac) {
+
+  // All good!
+
+}
+
 ```
