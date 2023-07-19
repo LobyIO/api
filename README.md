@@ -259,6 +259,40 @@ A `Email` contains translated fields for the object.
 | `html`* | `string` | | The complete HTML to be used for sending | `"<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Tran..."` |
 | `plainText`* | `string` | | Plain text version of email for email clients, that don't support html | `"Hello there! Here is your ticket"`
 
+## CustomerCheckin
+
+A `CustomerCheckin` contains checkin information for a customer. This object will be created each time a customer has been checked into the premise or department. It can be entitled to bed checkind in if it for instance has an active membership.
+
+
+| Property | Type | Default | Description | Example |
+| - | - | - | - | - |
+| `id`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | Unique identifier | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
+| `date`* | `number` | | Date for when the CustomerCheckin has been created. | `1646071663704` |
+| `customerId`* | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | ID for customer |  `"58e0f12c-6d45-4ca9-9cda-12e019d380d6"` |
+| `customer`* | `Customer` | | The customer object | `{}` |`1646071663704` |
+| `additionalPersons` | `number` | | Number of additional persons included in the checkin | `2` |
+| `additionalChildren` | `number` | | Number of additional children included in the checkin | `1` |
+| `departmentId` | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | | ID for department, if any. |  `"58e0f12c-6d45-4ca9-9cda-12e019d380d6"` |
+| `department` | `Department` | | The department object | `{}` |`1646071663704` |
+| `props` | `object` | `null` | A custom object, where anything can be stored. | `{ "foreignRelevantKey": "bd4a0997-39db-41d9-883a-cdfa83e2101f" }` |
+
+## List CustomerCheckin
+
+`GET /customer-checkins`
+
+This returns a list of customer checkins
+
+Example:
+```json
+[
+  {
+    "id": "bd4a0997-39db-41d9-883a-cdfa83e2101f",
+    "date": 1646071663704,
+    "props": {}
+  }
+]
+```
+
 ## Event
 
 An `Event` object represents an event, which can have tickets, that can be sold.
@@ -401,7 +435,7 @@ A `Field` that can be used to get additional information.
 
 | Property | Type | Default | Description | Example |
 | - | - | - | - | - |
-| `role` | `string` | `null` | Choose between some of the standard roles `EMAIL`, `FIRST_NAME`, `LAST_NAME`, `FULL_NAME`, `ADDRESS`, `ADDRESS2`, `POSTAL_CODE`, `CITY`, `COUNTRY`, `PHONE`, `GENDER`, `BIRTHDAY`, `BIRTHYEAR` | `FIRST_NAME` |
+| `role` | `string` | `null` | Choose between some of the standard roles `EMAIL`, `FIRST_NAME`, `LAST_NAME`, `FULL_NAME`, `ADDRESS`, `ADDRESS2`, `POSTAL_CODE`, `CITY`, `COUNTRY`, `PHONE` | `FIRST_NAME` |
 | `id` | `string` ([UUIDv4](https://en.wikipedia.org/wiki/Universally_unique_identifier)) | `null` | Unique identifier | `"bd4a0997-39db-41d9-883a-cdfa83e2101f"` |
 | `type` | `string` | `null` | Choose between one of these types: `TEXT`, `BIG_TEXT`, `RADIO`, `LIST`, `CHECKBOX` | `TEXT` |
 | `createdAt` | `number` | `null` | Date for when the object has been created. | `1646071663704` |
