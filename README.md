@@ -288,6 +288,16 @@ Example:
   {
     "id": "bd4a0997-39db-41d9-883a-cdfa83e2101f",
     "date": 1646071663704,
+    "customerId": "58e0f12c-6d45-4ca9-9cda-12e019d380d6",
+    "customer": {
+
+    },
+    "additionalPersons": 2,
+    "additionalChildren": 1,
+    "departmentId": "58e0f12c-6d45-4ca9-9cda-12e019d380d6",
+    "department": {
+
+    },
     "props": {}
   }
 ]
