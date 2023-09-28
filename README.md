@@ -2,7 +2,7 @@
 
 The base URL to send all API requests is https://api.loby.io. HTTPS is required for all API requests.
 
-The Loby API follows RESTful conventions when possible, with most operations performed via GET, POST, PATCH, and DELETE requests. Request and response bodies are encoded as JSON and therefore requests need to included the header `content-type: application/json` when appropriate. 
+The Loby API follows RESTful conventions when possible, with most operations performed via GET, POST, PATCH, and DELETE requests. Request and response bodies are encoded as JSON and therefore requests need to include the header `content-type: application/json` when appropriate. 
 
 Use Loby API to retrieve, create or modify data stored in your Loby account programmatically and to create custom integrations.
 
